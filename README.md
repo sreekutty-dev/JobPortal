@@ -35,5 +35,47 @@ This is a full-featured job portal built with **Angular (Frontend)** and **Djang
 
 ---
 
-##  Project Structure
+## Project Setup
 
+###  Backend Setup (Django)
+
+####  Prerequisites
+
+- Python 3.10+
+- Virtualenv (optional but recommended)
+
+####  Setup
+
+```bash
+cd backend
+python -m venv env
+env\Scripts\activate          # Windows
+source env/bin/activate       # Linux/Mac
+
+pip install -r requirements.txt
+
+# Apply migrations
+python manage.py makemigrations
+python manage.py migrate
+
+# Create superuser (for admin login)
+python manage.py createsuperuser
+
+# Run the server
+python manage.py runserver
+
+---
+```
+
+### Frontend Setup (Angular)
+#### Prerequisites
+Node.js (18+ recommended)
+Angular CLI
+
+#### Setup
+```bash
+cd frontend/jobportal-frontend
+npm install
+ng serve
+```
+Visit: http://localhost:4200
