@@ -1,13 +1,12 @@
-from turtle import home
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import JobViewSet, ApplicationViewSet
+from .views import JobViewSet, ApplicationViewSet, UserViewSet
 
 router = DefaultRouter()
-router.register('jobs', JobViewSet)
-router.register('applications', ApplicationViewSet)
+router.register('jobs', JobViewSet, basename='job')
+router.register('applications', ApplicationViewSet, basename='application')
+router.register('users', UserViewSet, basename='user')
 
 urlpatterns = [
-    path('', home),
     path('', include(router.urls)),
 ]

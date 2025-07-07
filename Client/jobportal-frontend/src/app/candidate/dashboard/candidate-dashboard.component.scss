@@ -1,0 +1,171 @@
+/** Layout **/
+.dashboard-wrapper {
+  display: flex;
+  min-height: 80vh;
+  background: #f7f9fc;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(25, 118, 210, 0.10);
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: #fff;
+  border-right: 1px solid #e3e8ee;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2.5rem 1.5rem 1.5rem 1.5rem;
+}
+
+.logo {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1976d2;
+  letter-spacing: 2px;
+  margin-bottom: 2.5rem;
+}
+
+.avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #ffe0b2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.2rem;
+  color: #b0853b;
+  margin-bottom: 1rem;
+}
+
+.welcome-user {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #222;
+  margin-bottom: 2.5rem;
+  text-align: center;
+}
+
+.sidebar-nav {
+  width: 100%;
+  margin-top: 1.5rem;
+}
+.sidebar-nav a, .sidebar-nav .nav-item {
+  display: flex;
+  align-items: center;
+  font-size: 1.08rem;
+  color: #374151;
+  padding: 0.7rem 1rem;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+}
+.sidebar-nav .active, .sidebar-nav a.active {
+  background: #e3f2fd;
+  color: #1976d2;
+  font-weight: 600;
+}
+.sidebar-nav .nav-dot {
+  width: 10px;
+  height: 10px;
+  background: #1976d2;
+  border-radius: 50%;
+  margin-right: 0.7rem;
+}
+
+/** Main content **/
+.main-content {
+  flex: 1;
+  background: #f7f9fc;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  background: linear-gradient(90deg, #1976d2 0%, #1565c0 100%);
+  color: #fff;
+  padding: 2rem 3rem 1.5rem 3rem;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.header h1 {
+  font-size: 2.6rem;
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: 1px;
+}
+
+.header .view-jobs-btn {
+  background: #395cb8;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 0.7rem 2rem;
+  font-size: 1.1rem;
+  margin-left: 2rem;
+  border: none;
+  transition: background 0.2s;
+}
+.header .view-jobs-btn:hover {
+  background: #1565c0;
+}
+
+/** Table **/
+.table-section {
+  padding: 2.5rem 3rem 2rem 3rem;
+}
+.table {
+  width: 100%;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 1px 4px rgba(25, 118, 210, 0.06);
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 2rem;
+}
+.table th {
+  background: none;
+  color: #374151;
+  font-size: 1.15rem;
+  font-weight: 600;
+  border-bottom: 2px solid #e3e8ee;
+  padding: 1rem 0.5rem;
+  text-align: left;
+}
+.table td {
+  color: #374151;
+  font-size: 1.08rem;
+  padding: 0.9rem 0.5rem;
+  border-bottom: 1px solid #f1f5f9;
+}
+.table tr:last-child td {
+  border-bottom: none;
+}
+
+.empty-row {
+  text-align: center;
+  color: #374151;
+  font-size: 1.1rem;
+  padding: 2.5rem 0;
+}
+
+@media (max-width: 1100px) {
+  .dashboard-wrapper {
+    flex-direction: column;
+  }
+  .sidebar {
+    width: 100%;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding: 1.5rem 1rem;
+    border-right: none;
+    border-bottom: 1px solid #e3e8ee;
+  }
+  .main-content, .header, .table-section {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+} 

@@ -1,0 +1,324 @@
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { JobService } from '../../services/job.service';
+import { Job } from '../../models/job.model';
+import { Application } from '../../models/application.model';
+import { ActivatedRoute, Router } from '@angular/router';
+
+@Component({
+  selector: 'app-admin-jobs',
+  standalone: true,
+  imports: [CommonModule, RouterModule, FormsModule],
+  // template: `
+    // <div class="container mt-4">
+    //   <div class="row">
+    //     <div class="col-12">
+    //       <div class="d-flex justify-content-between align-items-center mb-4">
+    //         <h2>{{ isEditing ? 'Edit Job' : 'Create New Job' }}</h2>
+    //         <button class="btn btn-secondary" routerLink="/admin/dashboard">Back to Dashboard</button>
+    //       </div>
+
+    //       <div class="card">
+    //         <div class="card-body">
+    //           <form (ngSubmit)="onSubmit()" #jobForm="ngForm">
+    //             <div class="row">
+    //               <div class="col-md-6 mb-3">
+    //                 <label for="title" class="form-label">Job Title *</label>
+    //                 <input 
+    //                   type="text" 
+    //                   class="form-control" 
+    //                   id="title"
+    //                   name="title"
+    //                   [(ngModel)]="job.title"
+    //                   required>
+    //               </div>
+    //               <div class="col-md-6 mb-3">
+    //                 <label for="company" class="form-label">Company *</label>
+    //                 <input 
+    //                   type="text" 
+    //                   class="form-control" 
+    //                   id="company"
+    //                   name="company"
+    //                   [(ngModel)]="job.company"
+    //                   required>
+    //               </div>
+    //             </div>
+
+    //             <div class="row">
+    //               <div class="col-md-6 mb-3">
+    //                 <label for="location" class="form-label">Location *</label>
+    //                 <input 
+    //                   type="text" 
+    //                   class="form-control" 
+    //                   id="location"
+    //                   name="location"
+    //                   [(ngModel)]="job.location"
+    //                   required>
+    //               </div>
+    //               <div class="col-md-6 mb-3">
+    //                 <label for="salary" class="form-label">Salary</label>
+    //                 <input 
+    //                   type="text" 
+    //                   class="form-control" 
+    //                   id="salary"
+    //                   name="salary"
+    //                   [(ngModel)]="job.salary"
+    //                   placeholder="e.g., $50,000 - $70,000">
+    //               </div>
+    //             </div>
+
+    //             <div class="row">
+    //               <div class="col-md-6 mb-3">
+    //                 <label for="jobType" class="form-label">Job Type *</label>
+    //                 <select 
+    //                   class="form-select" 
+    //                   id="jobType"
+    //                   name="jobType"
+    //                   [(ngModel)]="job.job_type"
+    //                   required>
+    //                   <option value="">Select Job Type</option>
+    //                   <option value="full-time">Full Time</option>
+    //                   <option value="part-time">Part Time</option>
+    //                   <option value="contract">Contract</option>
+    //                   <option value="internship">Internship</option>
+    //                 </select>
+    //               </div>
+    //               <div class="col-md-6 mb-3">
+    //                 <label for="experienceLevel" class="form-label">Experience Level *</label>
+    //                 <select 
+    //                   class="form-select" 
+    //                   id="experienceLevel"
+    //                   name="experienceLevel"
+    //                   [(ngModel)]="job.experience_level"
+    //                   required>
+    //                   <option value="">Select Experience Level</option>
+    //                   <option value="entry">Entry Level</option>
+    //                   <option value="mid">Mid Level</option>
+    //                   <option value="senior">Senior Level</option>
+    //                   <option value="executive">Executive Level</option>
+    //                 </select>
+    //               </div>
+    //             </div>
+
+    //             <div class="mb-3">
+    //               <label for="description" class="form-label">Job Description *</label>
+    //               <textarea 
+    //                 class="form-control" 
+    //                 id="description"
+    //                 name="description"
+    //                 [(ngModel)]="job.description"
+    //                 rows="5"
+    //                 required
+    //                 placeholder="Describe the job responsibilities and requirements..."></textarea>
+    //             </div>
+
+    //             <div class="mb-3">
+    //               <label for="requirements" class="form-label">Requirements</label>
+    //               <textarea 
+    //                 class="form-control" 
+    //                 id="requirements"
+    //                 name="requirements"
+    //                 [(ngModel)]="job.requirements"
+    //                 rows="3"
+    //                 placeholder="List specific requirements, skills, and qualifications..."></textarea>
+    //             </div>
+
+    //             <div class="mb-3">
+    //               <div class="form-check">
+    //                 <input 
+    //                   class="form-check-input" 
+    //                   type="checkbox" 
+    //                   id="isActive"
+    //                   name="isActive"
+    //                   [(ngModel)]="job.is_active">
+    //                 <label class="form-check-label" for="isActive">
+    //                   Active Job Posting
+    //                 </label>
+    //               </div>
+    //             </div>
+
+    //             <div class="d-flex justify-content-between">
+    //               <button type="button" class="btn btn-secondary" (click)="goBack()">
+    //                 Cancel
+    //               </button>
+    //               <button 
+    //                 type="submit" 
+    //                 class="btn btn-primary"
+    //                 [disabled]="!jobForm.form.valid || isSubmitting">
+    //                 {{ isSubmitting ? 'Saving...' : (isEditing ? 'Update Job' : 'Create Job') }}
+    //               </button>
+    //             </div>
+    //           </form>
+    //         </div>
+    //       </div>
+
+    //       <!-- Applications Section (for editing mode) -->
+    //       <div *ngIf="isEditing && applications.length > 0" class="mt-4">
+    //         <h3>Applications for this Job</h3>
+    //         <div class="table-responsive">
+    //           <table class="table table-striped">
+    //             <thead>
+    //               <tr>
+    //                 <th>Candidate</th>
+    //                 <th>Email</th>
+    //                 <th>Applied Date</th>
+    //                 <th>Status</th>
+    //                 <th>Actions</th>
+    //               </tr>
+    //             </thead>
+    //             <tbody>
+    //               <tr *ngFor="let application of applications">
+    //                 <td>{{ application.candidate_name }}</td>
+    //                 <td>{{ application.email }}</td>
+    //                 <td>{{ application.applied_on | date:'short' }}</td>
+    //                 <td>
+    //                   <select 
+    //                     class="form-select form-select-sm"
+    //                     [value]="application.status"
+    //                     (change)="onStatusChange(application.id!, $event)">
+    //                     <option value="pending">Pending</option>
+    //                     <option value="reviewed">Reviewed</option>
+    //                     <option value="shortlisted">Shortlisted</option>
+    //                     <option value="accepted">Accepted</option>
+    //                     <option value="rejected">Rejected</option>
+    //                   </select>
+    //                 </td>
+    //                 <td>
+    //                   <button class="btn btn-sm btn-outline-info" 
+    //                           (click)="viewApplication(application.id!)">
+    //                     View Details
+    //                   </button>
+    //                 </td>
+    //               </tr>
+    //             </tbody>
+    //           </table>
+    //         </div>
+    //       </div>
+    //     </div>
+    //   </div>
+    // </div>
+  // `,
+  // styles: [`
+  //   .card {
+  //     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  //   }
+  // `]
+  templateUrl: './admin-jobs.component.html',
+  styleUrls: ['./admin-jobs.component.scss']
+})
+export class AdminJobsComponent implements OnInit {
+  job: Job = {
+    title: '',
+    description: '',
+    company: '',
+    location: '',
+    salary: '',
+    requirements: '',
+    job_type: 'full-time',
+    experience_level: 'entry',
+    is_active: true
+  };
+  applications: Application[] = [];
+  isEditing = false;
+  isSubmitting = false;
+  errorMessage = '';
+
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private jobService: JobService
+  ) {}
+
+  ngOnInit() {
+    const jobId = this.route.snapshot.paramMap.get('id');
+    if (jobId) {
+      this.isEditing = true;
+      this.loadJob(parseInt(jobId));
+      this.loadApplications(parseInt(jobId));
+    }
+  }
+
+  loadJob(jobId: number) {
+    this.jobService.getJob(jobId).subscribe({
+      next: (job) => {
+        this.job = job;
+      },
+      error: (error) => {
+        console.error('Error loading job:', error);
+        this.errorMessage = 'Error loading job details';
+      }
+    });
+  }
+
+  loadApplications(jobId: number) {
+    this.jobService.getJobApplications(jobId).subscribe({
+      next: (applications) => {
+        this.applications = applications;
+      },
+      error: (error) => {
+        console.error('Error loading applications:', error);
+      }
+    });
+  }
+
+  onSubmit() {
+    this.isSubmitting = true;
+    this.errorMessage = '';
+
+    if (this.isEditing) {
+      this.jobService.updateJob(this.job.id!, this.job).subscribe({
+        next: (response) => {
+          this.isSubmitting = false;
+          alert('Job updated successfully!');
+          this.router.navigate(['/admin/dashboard']);
+        },
+        error: (error) => {
+          this.isSubmitting = false;
+          this.errorMessage = 'Error updating job. Please try again.';
+          console.error('Update error:', error);
+        }
+      });
+    } else {
+      this.jobService.createJob(this.job).subscribe({
+        next: (response) => {
+          this.isSubmitting = false;
+          alert('Job created successfully!');
+          this.router.navigate(['/admin/dashboard']);
+        },
+        error: (error) => {
+          this.isSubmitting = false;
+          this.errorMessage = 'Error creating job. Please try again.';
+          console.error('Create error:', error);
+        }
+      });
+    }
+  }
+
+  onStatusChange(applicationId: number, event: Event) {
+    const target = event.target as HTMLSelectElement;
+    if (target && target.value) {
+      this.updateApplicationStatus(applicationId, target.value);
+    }
+  }
+
+  updateApplicationStatus(applicationId: number, status: string) {
+    this.jobService.updateApplicationStatus(applicationId, status).subscribe({
+      next: (response) => {
+        console.log('Application status updated');
+      },
+      error: (error) => {
+        console.error('Error updating application status:', error);
+      }
+    });
+  }
+
+  viewApplication(applicationId: number) {
+    this.router.navigate(['/admin/applications', applicationId]);
+  }
+
+  goBack() {
+    this.router.navigate(['/admin/dashboard']);
+  }
+} 

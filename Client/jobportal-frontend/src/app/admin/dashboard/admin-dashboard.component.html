@@ -1,0 +1,82 @@
+<div class="admin-dashboard">
+  <div class="dashboard-header">
+    <h1>Admin Dashboard</h1>
+    <p>Welcome back! Here's an overview of your job portal.</p>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-icon">
+        <i class="fas fa-briefcase"></i>
+      </div>
+      <div class="stat-content">
+        <h3>{{ stats.totalJobs }}</h3>
+        <p>Total Jobs</p>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon active">
+        <i class="fas fa-check-circle"></i>
+      </div>
+      <div class="stat-content">
+        <h3>{{ stats.activeJobs }}</h3>
+        <p>Active Jobs</p>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon applications">
+        <i class="fas fa-users"></i>
+      </div>
+      <div class="stat-content">
+        <h3>{{ stats.totalApplications }}</h3>
+        <p>Total Applications</p>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon pending">
+        <i class="fas fa-clock"></i>
+      </div>
+      <div class="stat-content">
+        <h3>{{ stats.pendingApplications }}</h3>
+        <p>Pending Reviews</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="quick-actions">
+    <h2>Quick Actions</h2>
+    <div class="action-buttons">
+      <a routerLink="/admin/jobs/add" class="action-btn primary">
+        <i class="fas fa-plus"></i>
+        Add New Job
+      </a>
+      <a routerLink="/admin/applications" class="action-btn secondary">
+        <i class="fas fa-list"></i>
+        View Applications
+      </a>
+      <a routerLink="/admin/jobs" class="action-btn secondary">
+        <i class="fas fa-briefcase"></i>
+        Manage Jobs
+      </a>
+    </div>
+  </div>
+
+  <div class="recent-section">
+    <div class="recent-jobs">
+      <h2>Recent Job Postings</h2>
+      <div class="recent-list">
+        <p class="placeholder">No recent jobs to display</p>
+      </div>
+    </div>
+
+    <div class="recent-applications">
+      <h2>Recent Applications</h2>
+      <div class="recent-list">
+        <p class="placeholder">No recent applications to display</p>
+      </div>
+    </div>
+  </div>
+</div> 
