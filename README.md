@@ -1,29 +1,29 @@
-# 🧑‍💼 Full Stack Job Portal
+#  Full Stack Job Portal
 
 This is a full-featured job portal built with **Angular (Frontend)** and **Django REST Framework (Backend)**, supporting authentication via JWT, admin and candidate dashboards, file uploads, and status tracking.
 
 ---
 
-## 🚀 Features
+##  Features
 
-### 🔐 Authentication
+###  Authentication
 - JWT-based login system
 - Admin and Candidate roles
 - Protected routes and token handling
 
-### 👩‍💼 Admin Module
+###  Admin Module
 - Add job listings
 - View submitted applications
 - Update application status (e.g. Pending → Selected/Rejected)
 
-### 👨‍💻 Candidate Module
+###  Candidate Module
 - View job vacancies
 - Apply for jobs (Resume + Voice Upload)
 - Track application status
 
 ---
 
-## 🛠 Tech Stack
+##  Tech Stack
 
 | Layer      | Tech                        |
 |------------|-----------------------------|
@@ -35,5 +35,5 @@ This is a full-featured job portal built with **Angular (Frontend)** and **Djang
 
 ---
 
-## 📦 Project Structure
+##  Project Structure
 
